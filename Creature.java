@@ -1,3 +1,4 @@
+import java.util.Random;
 
 /**
  * Abstract class Creature - 
@@ -15,6 +16,7 @@ public abstract class Creature
     private int str;
     private int max_hp;
     private int hp;
+    private Random rand = new Random();
     
     /**
      * default constructor - this should never actually run
@@ -33,8 +35,9 @@ public abstract class Creature
      * @param str the strength of the creature, used to calculate damage
      * @param hp the health of the creature at the start of the simulation, and the current health levels during battle
      */
-    public Creature (int str, int hp) {
-       //implement this
+    public Creature (int strength, int hitpoints) {
+       str = strength;
+       hp = hitpoints;
     }
     
     
@@ -43,8 +46,9 @@ public abstract class Creature
      * @return a value between 1 and str to be used to cause damage to another creature
      */
     public int damage(){
-        // implement this
-        return 0;
+        int dmg;
+        dmg = rand.nextInt(str) + 1;
+        return dmg;
     }
     
     
@@ -53,8 +57,7 @@ public abstract class Creature
      * @return true when current hit point level is greater than zero
      */
     public boolean isAlive() {
-        //implement this
-        return false; //change this
+        return hp > 0;
     }
     
     /**
@@ -62,8 +65,7 @@ public abstract class Creature
      * @return true when current hit point level is less than or equal to zero
      */
     public boolean isDead() {
-        //implement this
-        return false; //change this
+        return hp < 0;
     }
     
     
@@ -73,7 +75,7 @@ public abstract class Creature
      * @param damage value to remove from hit point count
      */
     public void takeDamage(int damage) {
-        // implement this
+        hp = hp - damage;
     }
     
 }
